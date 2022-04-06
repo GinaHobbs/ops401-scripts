@@ -1,4 +1,10 @@
 #!/bin/python3
+#Script Name: ops02.py
+#Author: Gina Hobbs
+#Date of last revision: 06 April 2022
+#Description of purpose: Send pings to a network every 2 seconds
+#Declaration of variables: ping, now
+#Declaration of functions (if used):
 
 # import the datetime library
 import datetime
