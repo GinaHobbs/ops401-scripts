@@ -6,31 +6,25 @@
 #Declaration of variables: ping, now
 #Declaration of functions (if used):
 
-# import the datetime library
-import datetime
+# import the datetime, os and time library
+import datetime,time,os
 
-# import the time library
-import time
-
-# import the os library
-import os
-
-# store the current time to a variable and print it to the terminal
+# store the current time to a variable
 now = datetime.datetime.now()
-print("The current date and time is: ")
-print(str(now))
 
-while True:
-    print("=======================================================")
-    print("Start: %s" % time.ctime())
-    time.sleep(2)
-    print(os.system("ping -c 1 8.8.8.8"))
-    ping = os.system("ping -c 1 8.8.8.8")
+# Declare function check_ping
+def check_ping(target):
+    ping = os.system("ping -c 1 " + target)
     if ping == 0:
         print("Network Active")
     else:
         print("Network Inactive")
-    print("End: %s" % time.ctime())
+
+while True:
+    print("=======================================================")
+    print("The current date and time is: " + str(now))
+    check_ping("8.8.8.8")
+    time.sleep(2)
     print("=======================================================")
 
 
