@@ -12,39 +12,39 @@ import datetime,time,os,smtplib
 # store the current time to a variable
 now = datetime.datetime.now()
 
-def mail(ping):
+# Set ping flag for mail
+old_ping_status = "none"
+
+def mail(ping_status, old_ping_status):
     # Email administrator
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
     server.ehlo()
 
     # Log in to the server
-    server.login("email", "password")
+    server.login("ginamariehobbs@gmail.com", "password")
 
     # Check the ping variable to see if network is up or down
-    if ping == 0:
-        msg = "The network is active."
-    else:
-        msg = "The network is inactive."
-
-    # Send the mail
-    server.sendmail("email", "email", msg)
-    server.quit()
+    if ping_status != old_ping_status:
+        msg = "The network has changed. It is now " + ping_status + "."
+        server.sendmail("ginamariehobbs@gmail.com", "ginamariehobbs@gmail.com", msg)
+        server.quit()
 
 # Declare function check_ping
 def check_ping(target):
     ping = os.system("ping -c 1 " + target)
     if ping == 0:
         print("Network Active")
+        ping_status = "up"
     else:
         print("Network Inactive")
-    return ping
+        ping_status = "down"
+    return ping_status
 
 while True:
     print("=======================================================")
     print("The current date and time is: " + str(now))
-    ping = check_ping("8.8.8.8")
-    mail(ping)
+    ping_status = check_ping("8.8.8.8")
+    mail(ping_status, old_ping_status)
+    old_ping_status = ping_status
     time.sleep(2)
     print("=======================================================")
-
-
