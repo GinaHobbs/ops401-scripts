@@ -18,7 +18,7 @@ def mail(ping):
     server.ehlo()
 
     # Log in to the server
-    server.login("ginamariehobbs@gmail.com", "Kawaii22!!")
+    server.login("email", "password")
 
     # Check the ping variable to see if network is up or down
     if ping == 0:
@@ -27,7 +27,7 @@ def mail(ping):
         msg = "The network is inactive."
 
     # Send the mail
-    server.sendmail("ginamariehobbs@gmail.com", "ginamariehobbs@gmail.com", msg)
+    server.sendmail("email", "email", msg)
     server.quit()
 
 # Declare function check_ping
