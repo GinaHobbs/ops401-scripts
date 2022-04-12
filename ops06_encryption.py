@@ -24,13 +24,6 @@ def write_key():
 def load_key():
     return open("key.key", "rb").read()
 
-# Generate and write a new key
-write_key()
-
-#Load the generated key
-key = load_key()
-print("Key is  " + str(key.decode('utf-8')))
-
 # Prompt the user to input a 1 or 2 for encrypting a file or a message
 def menu():
     print("1: Encrypt a file")
@@ -53,6 +46,7 @@ def encrypt_file(file_name):
     encrypted_data = f.encrypt(file_data)
     with open(file_name, "wb") as file:
         file.write(encrypted_data)
+    print(key)
 
 # Define the decrypt file function
 def decrypt_file(file_name):
@@ -60,40 +54,29 @@ def decrypt_file(file_name):
     f = Fernet(key)
     with open(file_name, "rb") as file:
         encrypted_data = file.read()
+    print(encrypted_data)
     decrypted_data = f.decrypt(encrypted_data)
     with open(file_name, "wb") as file:
         file.write(decrypted_data)
+    print(decrypted_data)
     
-
 # Define the encrypt_message function
 def encrypt_message(message):
     write_key()
     key = load_key()
     e_message = message.encode()
     print("Plaintext is " + str(e_message.decode('utf-8')))
-
-    # Initialize the Fernet class
     f = Fernet(key)
-
-    # Encrypt the message
     encrypted = f.encrypt(e_message)
-
-    # Print the encrypted message
-    print("Ciphertext is " + str(encrypted))
+    print("Ciphertext is " + str(encrypted.decode('utf-8')))
 
 # Define the decrypt_message function
 def decrypt_message(message):
-    #write_key()
     key = load_key()
-    d_message = message.encode('utf-8')
-
-    # Initialize the Fernet class
+    e_message = message.encode('utf-8')
     f = Fernet(key)
-
-    decrypted = f.decrypt(d_message)
-
-    # Print the decrypted message
-    print("Plaintext is " + str(decrypted))
+    decrypted = f.decrypt(e_message)
+    print("Plaintext is " + decrypted.decode('utf-8'))
 
 # Capture the message or file name from the user.
 def menu():
