@@ -10,6 +10,7 @@
 
 # Import libraries
 from cryptography.fernet import Fernet
+import os
 
 ### Functions for key processing
 
@@ -30,11 +31,31 @@ def menu():
     print("2: Decrypt a file")
     print("3: Encrypt a message")
     print("4: Decrypt a message")
+    print("5: Encrypt a folder.")
+    print("6: Decrypt a folder.")
     option = input("Please enter the value for what you would like to do.\n")
     return option
 
 # Run menu
 option = menu()
+
+def encrypt_folder(folder):
+    for root, dirs, files in os.walk(folder, topdown=False):
+        for name in files:
+            file_name = (os.path.join(root, name))
+            encrypt_file(file_name)
+        for name in dirs:
+            file_name = (os.path.join(root, name))
+            encrypt_file(file_name)
+
+def decrypt_folder(folder):
+    for root, dirs, files in os.walk(folder, topdown=False):
+        for name in files:
+            file_name = (os.path.join(root, name))
+            decrypt_file(file_name)
+        for name in dirs:
+            file_name = (os.path.join(root, name))
+            decrypt_file(file_name)
 
 # Define the encrypt file function
 def encrypt_file(file_name):
@@ -92,6 +113,12 @@ def menu():
     elif option == '4':
         message = input("Please enter the message you wish to decrypt.\n")
         decrypt_message(message)
+    elif option == '5':
+        folder = input("Please enter the folder you wish to decrypt.\n")
+        encrypt_folder(folder)
+    elif option == '6':
+        folder = input("Please enter the folder you wish to decrypt.\n")
+        decrypt_folder(folder)
     else:
         print("Please enter a valid menu option, a numeral between 1 and 4.\n")
         menu()
