@@ -1,12 +1,13 @@
 #!/bin/python3
 # Script Name: ops06_encryption.py
 # Author: Gina Hobbs
-# Date of last revision: 11 April 2022
+# Date of last revision: 13 April 2022
 # Description of purpose: encrypt and decrypt files and messages
 # Declaration of variables: file_name, message, e_message, d_message, ecrypted_data,
-# decrypted_data, key, f, option, decrypted, encrypted
+# decrypted_data, key, f, option, decrypted, encrypted, folder
 # Declaration of functions (if used): write_key(), load_key(), encrypt_file(), 
-# decrypt_file(), encrypt_message(), decrypt_message(), menu(), 
+# decrypt_file(), encrypt_message(), decrypt_message(), menu(), encrypt_folder(),
+# decrypt_folder()
 
 # Import libraries
 from cryptography.fernet import Fernet
@@ -59,7 +60,6 @@ def decrypt_folder(folder):
 
 # Define the encrypt file function
 def encrypt_file(file_name):
-    write_key()
     key = load_key()
     f = Fernet(key)
     with open(file_name, "rb") as file:
@@ -83,7 +83,6 @@ def decrypt_file(file_name):
     
 # Define the encrypt_message function
 def encrypt_message(message):
-    write_key()
     key = load_key()
     e_message = message.encode()
     print("Plaintext is " + str(e_message.decode('utf-8')))
@@ -103,18 +102,21 @@ def decrypt_message(message):
 def menu():
     if option == '1':
         file_name = input("Please enter the file name you wish to encrypt.\n")
+        write_key()
         encrypt_file(file_name)
     elif option == '2':
         file_name = input("Please enter the name you wish to decrypt.\n")
         decrypt_file(file_name)
     elif option == '3':
         message = input("Please enter the message you wish to encrypt.\n")
+        write_key()
         encrypt_message(message)
     elif option == '4':
         message = input("Please enter the message you wish to decrypt.\n")
         decrypt_message(message)
     elif option == '5':
         folder = input("Please enter the folder you wish to decrypt.\n")
+        write_key()
         encrypt_folder(folder)
     elif option == '6':
         folder = input("Please enter the folder you wish to decrypt.\n")
