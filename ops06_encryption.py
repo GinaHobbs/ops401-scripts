@@ -7,7 +7,7 @@
 # decrypted_data, key, f, option, decrypted, encrypted, folder
 # Declaration of functions (if used): write_key(), load_key(), encrypt_file(), 
 # decrypt_file(), encrypt_message(), decrypt_message(), menu(), encrypt_folder(),
-# decrypt_folder()
+# decrypt_folder(), change_wallpaper()
 
 # Import libraries
 import ctypes
