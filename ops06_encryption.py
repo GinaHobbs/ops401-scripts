@@ -1,7 +1,7 @@
 #!/bin/python3
 # Script Name: ops06_encryption.py
 # Author: Gina Hobbs
-# Date of last revision: 13 April 2022
+# Date of last revision: 14 April 2022
 # Description of purpose: encrypt and decrypt files and messages
 # Declaration of variables: file_name, message, e_message, d_message, ecrypted_data,
 # decrypted_data, key, f, option, decrypted, encrypted, folder
@@ -10,8 +10,10 @@
 # decrypt_folder()
 
 # Import libraries
+import ctypes
 from cryptography.fernet import Fernet
 import os
+from tkinter import messagebox
 
 ### Functions for key processing
 
@@ -34,11 +36,16 @@ def menu():
     print("4: Decrypt a message")
     print("5: Encrypt a folder.")
     print("6: Decrypt a folder.")
+    print("7: Ransomware Simulation - Popup")
+    print("8: Ransomware Simulation - Change Wallpaper")
     option = input("Please enter the value for what you would like to do.\n")
     return option
 
 # Run menu
 option = menu()
+
+def change_wallpaper():
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, "c:\Users\fhopkins\ransomware.jpg" , 0)
 
 def encrypt_folder(folder):
     for root, dirs, files in os.walk(folder, topdown=False):
@@ -121,6 +128,10 @@ def menu():
     elif option == '6':
         folder = input("Please enter the folder you wish to decrypt.\n")
         decrypt_folder(folder)
+    elif option == '7':
+        messagebox.showinfo("Ransomware","Your data has been encrypted.")
+    elif option == '8':
+        change_wallpaper()
     else:
         print("Please enter a valid menu option, a numeral between 1 and 4.\n")
         menu()
