@@ -57,8 +57,11 @@ elif option == '2':
     for host in ip_list:
         src_port = random.randint(1025,65534)
         resp = sr1(
-            IP(dst=host)
+            IP(dst=host)/TCP(sport=src_port,dport=80,flags="S"),timeout=1,
+            verbose=0,
         )
+
+        print(resp)
 
         if resp is None:
             print(f"{host} is down or unresponsive.")
@@ -72,4 +75,4 @@ elif option == '2':
         else:
             print(f"{host} is responding.")
             count += 1
-    print("There are " + count + " hosts online.")
+    print("There are " + type(str(count)) + " hosts online.")
